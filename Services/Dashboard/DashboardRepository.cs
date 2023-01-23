@@ -109,16 +109,7 @@ namespace Services.Dashboard
             return _genericRepository.GetT(id);
         }
 
-        /// <summary>
-        /// Authorize person can remove the product from the table
-        /// </summary>
-        /// <param name="id"></param>
-        public void DeleteProduct(long id)
-        {
-            Productlist product = GetProduct(id);
-            _genericRepository.Remove(product);
-            _genericRepository.Savechanges();
-        }
+       
 
         /// <summary>
         /// Add the item in cart by passing ID 

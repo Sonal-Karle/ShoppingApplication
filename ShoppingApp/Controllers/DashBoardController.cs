@@ -177,27 +177,7 @@ public class DashboardController : Controller
 
         }
     }
-    /// <summary>
-    /// Authorize person can delete the product for that call dashboard repository
-    /// </summary>
-    /// <param name="id"></param>
-    /// <returns></returns>
-    [Authorize(Roles = "Admin")]
-    [HttpGet("DeleteProduct")]
-    public IActionResult DeleteProduct(long id)
-    {
-        try
-        {
-            _dashboardRepository.DeleteProduct(id);
-            GetAllProduct();
-            return View("~/Views/Dashboard/Product.cshtml");
-        }
-        catch (Exception exception)
-        {
-            return BadRequest(new { success = false, exception.Message });
-        }
-    }
-
+    
     /// <summary>
     /// Get particular product from the dashboard for that call dashboardrepository by passing id
     /// </summary>

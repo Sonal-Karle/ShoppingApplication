@@ -138,11 +138,11 @@ namespace ShoppingApp
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Dashboard}/{action=GetProductAll}");                
+                    pattern: "{controller=Dashboard}/{action=GetAllProduct}");                
                 
                 endpoints.MapControllerRoute(
                     name: "",
-                    pattern: "{controller=Dashboard}/{action=GetProductAll}");
+                    pattern: "{controller=Dashboard}/{action=GetAllProduct}");
             });
         }
     }

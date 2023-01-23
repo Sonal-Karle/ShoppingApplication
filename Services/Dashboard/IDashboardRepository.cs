@@ -17,7 +17,6 @@ namespace Services.Dashboard
         IEnumerable<Productlist> GetSearchItems(string searchString);
         void InsertProduct(Productlist entity);
         Productlist GetProduct(long id);
-        void DeleteProduct(long id);
         void AddtoCart(long productid, long userid);
         string CheckingRole(long userid);
     }

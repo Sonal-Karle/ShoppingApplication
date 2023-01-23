@@ -17,6 +17,7 @@
         <!-- Header Main -->
         <div class="header_main">
             <div class="container">
+                <div class="container">
                 <div class="row" style="height:125px">
 
                    <!-- Logo -->
@@ -48,7 +49,7 @@
                     </div>
                 </div>
                 <!--Filter-->
-                <div class="col-lg-1 col-8 order-lg-2 order-2 text-lg-left text-right">
+                <div class="col-lg-1 col-8 order-lg-2 order-2 text-lg-left text-right" style="padding-top:28px">
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
@@ -66,7 +67,7 @@
                     @if (Model.FirstOrDefault().Role == "Admin")
                     {
                         <div class="col-lg-1 col-8 order-lg-2 order-2 text-lg-left text-right">
-                            <a href="@Url.Action("CreateProduct","Dashboard")" class="btn btn-primary">CreatProduct</a>
+                            <a href="@Url.Action("CreateProduct","Dashboard")" class="btn btn-primary" style="margin-top:25px">CreatProduct</a>
                         </div>
                     }
                 }
@@ -92,9 +93,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-</div>
+           </div>
+       
+
 <div class="row">
     @foreach (var item in Model)
     {
@@ -130,16 +131,16 @@
                         }
                         }
                     
-                    @if(item.Role == "Admin")
-                                {
-                                     <a href="@Url.Action("DeleteProduct","Dashboard", new {id=item.Id })" class="btn btn-primary btn-lg">Delete</a>
-
-                                }
+                   
 
                         </div>
                     </div>
                 </section>
     }
+    </div>
+    </div>
+    </div>
+    
 </div>
 
 
