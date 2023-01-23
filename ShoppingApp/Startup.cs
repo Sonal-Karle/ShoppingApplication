@@ -136,13 +136,17 @@ namespace ShoppingApp
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Dashboard}/{action=GetAllProduct}");                
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Dashboard}/{action=GetAllProduct}");                
                 
+                //endpoints.MapControllerRoute(
+                //    name: "",
+                //    pattern: "{controller=Dashboard}/{action=GetAllProduct}");
+
                 endpoints.MapControllerRoute(
-                    name: "",
-                    pattern: "{controller=Dashboard}/{action=GetAllProduct}");
+                  name: "Home",
+                  pattern: "{controller=Dashboard}/{action=GetAllProduct}");
             });
         }
     }
