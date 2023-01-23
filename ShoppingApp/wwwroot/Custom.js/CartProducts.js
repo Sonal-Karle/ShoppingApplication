@@ -160,7 +160,7 @@ function DecreaseCount(itemId) {
   used in the functions to remove characters and take out number from string
 */
 function StrToNum(strVal) {
-    return parseInt(strVal.replace(/^\D+/g, ''));   
+    return parseInt(strVal.replace(/^\D+/g, ''));
 }
 
 //Usage : On page load calling the function ShowCompleteAddress()
@@ -208,13 +208,15 @@ function SaveAddress() {
   Taking the complete address from dropdown data and updating to label
 */
 function ShowCompleteAddress() {
-    var e = document.getElementById("listAddress");
-    if (!e === null) {
-        var option = e.options[e.selectedIndex];
-        var fullAddress = option.getAttribute("data-complete");
-        document.getElementById("labelAddress").innerHTML = 'Delivery Address - ' + fullAddress;
+    var element = document.getElementById("listAddress");
+    if (typeof element !== 'undefined' && element !== null) {
+        if (element.options.selectedIndex > -1) {
+            var option = element.options[element.selectedIndex];
+            var fullAddress = option.getAttribute("data-complete");
+            document.getElementById("labelAddress").innerHTML = 'Delivery Address - ' + fullAddress;
+        }
     }
-};
+}
 
 //Usage : function to reload the CartItems page and redirect CheckoutSuccess message view
 function ShowSuccess() {
@@ -227,7 +229,7 @@ function ReloadCart() {
 }
 //Usage : Function to pass productId to delete modal
 function passDataToDeleteModal() {
-    var e = document.getElementById("removeCartItem");       
+    var e = document.getElementById("removeCartItem");
     var productId = e.getAttribute("data-id");
     document.getElementById("deleteModalProductId").value = productId;
 }
