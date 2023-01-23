@@ -209,9 +209,11 @@ function SaveAddress() {
 */
 function ShowCompleteAddress() {
     var e = document.getElementById("listAddress");
-    var option = e.options[e.selectedIndex];
-    var fullAddress = option.getAttribute("data-complete");
-    document.getElementById("labelAddress").innerHTML = 'Delivery Address - ' + fullAddress;
+    if (!e === null) {
+        var option = e.options[e.selectedIndex];
+        var fullAddress = option.getAttribute("data-complete");
+        document.getElementById("labelAddress").innerHTML = 'Delivery Address - ' + fullAddress;
+    }
 };
 
 //Usage : function to reload the CartItems page and redirect CheckoutSuccess message view
