@@ -49,8 +49,8 @@ public class DashboardController : Controller
     /// Get All the product to display on dashboard 
     /// </summary>
     /// <returns></returns>
-    //[HttpGet("GetAllProduct")]
     [HttpGet("")]
+    
     public IActionResult GetAllProduct()
     {
         try
@@ -79,7 +79,7 @@ public class DashboardController : Controller
     /// </summary>
     /// <returns></returns>
     [Authorize(Roles = "Admin")]
-    [HttpGet("CreateProduct")]
+    [HttpGet("CreateProductofcomponent")]
     public IActionResult CreateProduct()
     {
         try
@@ -211,7 +211,7 @@ public class DashboardController : Controller
     /// Sort the product using price range  Low to high
     /// </summary>
     /// <returns></returns>
-    [HttpGet("GetProductLowHigh")]
+    [HttpGet("LowToHigh")]
     public IActionResult GetProductLowHigh()
     {
         try
@@ -235,7 +235,7 @@ public class DashboardController : Controller
     /// Sort the product using price range high to low
     /// </summary>
     /// <returns></returns>
-    [HttpGet("GetProductHighLow")]
+    [HttpGet("HighToLow")]
     public IActionResult GetProductHighLow()
     {
         try
