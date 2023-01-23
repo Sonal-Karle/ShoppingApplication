@@ -33,7 +33,7 @@ namespace ShoppingApp.Controllers
         /// </summary>
         /// <returns> List of orders </returns>
         [Authorize(Roles = "Admin,Customer")]
-        [HttpGet("GetOrders")]
+        [HttpGet("")]
         public ActionResult GetOrders()
         {
             try
