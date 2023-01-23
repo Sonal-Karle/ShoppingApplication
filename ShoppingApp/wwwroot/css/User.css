@@ -1,0 +1,8 @@
+input[type=text], input[type=password] {
+    width: 42%;
+}
+
+table.tblemail {
+    width: 60%;
+    table-layout: fixed;
+}

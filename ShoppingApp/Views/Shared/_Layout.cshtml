@@ -1,0 +1,107 @@
+﻿<style>
+    .top_bar_user div {
+        display: inline-block;
+    }
+
+        .top_bar_user div:nth-child(2) {
+            margin-right: 21px;
+        }
+
+            .top_bar_user div:nth-child(2)::after {
+                display: block;
+                position: absolute;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                -moz-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                -o-transform: translateY(-50%);
+                transform: translateY(-50%);
+                right: -13px;
+                width: 1px;
+                height: 17px;
+                background: rgba(0,0,0,0.1);
+                content: '';
+            }
+
+    .top_bar_user a {
+        font-size: 16px;
+        font-weight: 300;
+        line-height: 56px;
+        color: #000;
+        -webkit-transition: all 200ms ease;
+        -moz-transition: all 200ms ease;
+        -ms-transition: all 200ms ease;
+        -o-transition: all 200ms ease;
+        transition: all 200ms ease;
+    }
+
+        .top_bar_user a:hover {
+            color: #8a8a8a;
+        }
+</style>
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ShoppingApp</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+</head>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Dashboard" asp-action="GetAllProduct">ShoppingApp</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="GetAllProduct">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                    </ul>
+                </div>
+                @if (string.IsNullOrEmpty(@Accessor.HttpContext.Session.GetString("token")))
+                {
+                    <div class="top_bar_user">
+                        <div class="user_icon"></div>
+
+                        <div><a href='@Url.Action("Registration", "User")'>Register</a></div>
+                        <div><a href='@Url.Action("LoginCustomer", "Login")'>Log In</a></div>
+                    </div>
+                }
+                @if (!string.IsNullOrEmpty(@Accessor.HttpContext.Session.GetString("token")))
+                {
+                    <div class="top_bar_user">
+                        <div><a href='@Url.Action("LogoutCustomer", "Login")'>Log Out</a></div>
+                    </div>
+                }
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - ShoppingApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
