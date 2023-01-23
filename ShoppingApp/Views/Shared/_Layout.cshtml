@@ -73,20 +73,34 @@
                 </div>
                 @if (string.IsNullOrEmpty(@Accessor.HttpContext.Session.GetString("token")))
                 {
-                   
+                     <div class="dropdown show">
+                      <a  href="#"  id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/UserIcon.png"/>
+                      </a>
 
-                       
+                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href='@Url.Action("Registration", "User")'>Register</a>
+                            <a class="dropdown-item" href='@Url.Action("LoginCustomer", "Login")'>Log In</a>
+                      </div>
+                    </div>
 
-                        <div><a href='@Url.Action("Registration", "User")'>Register</a></div>
-                     
-                      <div><a href='@Url.Action("LoginCustomer", "Login")' >Log In</a></div>
+                    
                   
                 }
                 @if (!string.IsNullOrEmpty(@Accessor.HttpContext.Session.GetString("token")))
                 {
-                    <div class="top_bar_user">
-                        <div><a href='@Url.Action("LogoutCustomer", "Login")'>Log Out</a></div>
+
+                    <div class="dropdown show">
+                        <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="~/UserIcon.png" />
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href='@Url.Action("LogoutCustomer", "Login")'>Log Out</a>
+                        </div>
                     </div>
+                   @* <div class="top_bar_user">
+                        <div><a href='@Url.Action("LogoutCustomer", "Login")'>Log Out</a></div>
+                    </div>*@
                 }
             </div>
         </nav>

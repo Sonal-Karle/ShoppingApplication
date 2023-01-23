@@ -49,7 +49,8 @@ public class DashboardController : Controller
     /// Get All the product to display on dashboard 
     /// </summary>
     /// <returns></returns>
-    [HttpGet("GetAllProduct")]
+    //[HttpGet("GetAllProduct")]
+    [HttpGet("")]
     public IActionResult GetAllProduct()
     {
         try
@@ -157,7 +158,8 @@ public class DashboardController : Controller
     /// </summary>
     /// <param name="id"></param>
     /// <returns></returns>
-    [HttpGet("AddToCart")]
+    //[HttpGet("AddToCart")]
+   [HttpGet("Cartpage")]
     public IActionResult AddToCart(long id)
     {
         try
