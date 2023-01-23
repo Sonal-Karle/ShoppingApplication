@@ -4,16 +4,19 @@ using Services.Registration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Http;
 
 namespace ShoppingApp.Controllers
 {
     public class UserController : Controller
     {
-        IUserRepository iuserRepository;
+        IUserRepository _iuserRepository;
+        public long _currentUserId;
 
-        public UserController(IUserRepository _iuserRepository)
+        public UserController(IUserRepository iuserRepository)
         {
-            this.iuserRepository = _iuserRepository;
+            this._iuserRepository = iuserRepository;
         }
 
         /// <summary>
@@ -26,7 +29,7 @@ namespace ShoppingApp.Controllers
             try
             {
                 List<User> lstUser = new List<User>();
-                iuserRepository.GetUsers().ToList().ForEach(u =>
+                _iuserRepository.GetUsers().ToList().ForEach(u =>
                 {
                     User user = null;
                     user = new User()
@@ -72,6 +75,27 @@ namespace ShoppingApp.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// Loading user data view
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet("GetUser")]
+        public ActionResult GetUser()
+        {
+            try
+            {
+                GetCurrentId();
+                User user = _iuserRepository.GetUser(_currentUserId);
+                string[] roles = { Role.Admin, Role.Customer };
+                ViewData["roles"] = roles;
+                return View("GetUser", user);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
         /// <summary>
         /// After registration showing success message
@@ -81,6 +105,16 @@ namespace ShoppingApp.Controllers
         public IActionResult RegistrationSuccess()
         {
             return View("UserRegistrationSuccess");
+        }
+
+        /// <summary>
+        /// After update showing success message
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult UpdateSuccess()
+        {
+            return View("UserUpdateSuccess");
         }
 
         /// <summary>
@@ -107,7 +141,7 @@ namespace ShoppingApp.Controllers
                         policyFlag = user.policyFlag
                     };
 
-                    var inserted = iuserRepository.InsertUser1(loginUser);
+                    var inserted = _iuserRepository.InsertUser1(loginUser);
                     if (inserted == 1)
                     {
                         return Json(new { success = true, message = "Success" });
@@ -133,29 +167,45 @@ namespace ShoppingApp.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPut("UpdateUser")]
-        public int UpdateUser(User model)
+        [HttpPost]
+        public ActionResult UpdateUser(User user)
         {
             try
             {
-                User UserEntity = new User
+                if (user.email != "" && user.firstName != "" && user.email != null && user.firstName != null && user.password != "" && user.password != null)
                 {
-                    Id = model.Id,
-                    firstName = model.firstName,
-                    lastName = model.lastName,
-                    email = model.email,
-                    phoneNumber = model.phoneNumber,
-                    password = model.password,
-                    policyFlag = model.policyFlag,
-                    Role = model.Role,
+                    User loginUser = new User
+                    {
+                        Id=user.Id,
+                        firstName = user.firstName,
+                        ConfirmPassword = user.ConfirmPassword,
+                        email = user.email,
+                        lastName = user.lastName,
+                        password = Models.EncDec.Encrypt(user.password),
+                        Role = user.Role,
+                        phoneNumber = user.phoneNumber,
+                        policyFlag = user.policyFlag
+                    };
 
-                };
-                iuserRepository.UpdatetUser(UserEntity);
-                return 1;
+                    _iuserRepository.UpdatetUser(loginUser);
+                    var inserted = 1;
+                    if (inserted == 1)
+                    {
+                        return Json(new { success = true, message = "Success" });
+                    }
+                    else
+                    {
+                        return Json(new { success = true, message = "Email already exists" });
+                    }
+                }
+                else
+                {
+                    return Json(new { success = false, message = "Fill all mandatory fields" });
+                }
             }
-            catch (Exception)
+            catch (Exception exception)
             {
-                throw;
+                return BadRequest(new { success = false, exception.Message });
             }
         }
 
@@ -169,7 +219,7 @@ namespace ShoppingApp.Controllers
         {
             try
             {
-                iuserRepository.DeleteUser(id);
+                _iuserRepository.DeleteUser(id);
                 return 1;
             }
             catch (Exception)
@@ -188,7 +238,7 @@ namespace ShoppingApp.Controllers
         {
             try
             {
-                if (iuserRepository.EmailExists(model.email))
+                if (_iuserRepository.EmailExists(model.email))
                 {
                     return Json(new { success = true, message = "Email already exists" });
                 }
@@ -200,6 +250,24 @@ namespace ShoppingApp.Controllers
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        /// <summary>
+        /// Get current logined User Id
+        /// </summary>
+        /// <returns> Current userId from Jwt token </returns>
+        public void GetCurrentId()
+        {
+            try
+            {
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = (JwtSecurityToken)tokenHandler.ReadToken(HttpContext.Session.GetString("token"));
+                _currentUserId = long.Parse(securityToken.Claims.FirstOrDefault(c => c.Type == "Id")?.Value);
+            }
+            catch (Exception)
+            {
+                _currentUserId = 0;
             }
         }
     }
