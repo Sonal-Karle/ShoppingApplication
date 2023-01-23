@@ -63,6 +63,7 @@ public class DashboardController : Controller
             {
                 product.Role = CheckRole();
             }
+            ViewBag.Role = CheckRole();
             return View("~/Views/Dashboard/Product.cshtml", products);
 
 

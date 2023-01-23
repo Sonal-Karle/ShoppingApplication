@@ -87,8 +87,8 @@ function UpdateCartData() {
 /*Usage : To remove the product from cart
   Passing productId into CartController function RemoveProductFromCart()
 */
-function RemoveProductFromCart(itemId) {
-
+function RemoveProductFromCart() {
+    itemId = document.getElementById("deleteModalProductId").value;
     var productToremove = {
         "productId": itemId
     };
@@ -222,4 +222,10 @@ function ShowSuccess() {
 //Usage : Function to reload the CartItems page
 function ReloadCart() {
     window.location.href = '/Cart/CartItems';
+}
+//Usage : Function to pass productId to delete modal
+function passDataToDeleteModal() {
+    var e = document.getElementById("removeCartItem");       
+    var productId = e.getAttribute("data-id");
+    document.getElementById("deleteModalProductId").value = productId;
 }
