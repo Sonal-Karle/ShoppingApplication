@@ -71,6 +71,7 @@ namespace ShoppingApp.Controllers
                     {
                         product.Role = dashboardRepository.CheckingRole(user.Id);
                     }
+                    ViewBag.Role = dashboardRepository.CheckingRole(user.Id);
                     return View("~/Views/Dashboard/Product.cshtml", products);
                 }
                 return BadRequest("User Not found");
