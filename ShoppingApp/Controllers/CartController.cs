@@ -47,7 +47,7 @@ namespace ShoppingApp.Controllers
         /// </summary>
         /// <returns>List of products in cart</returns>
         [Authorize(Roles = "Admin,Customer")]
-        [HttpGet("CartItems")]
+        [HttpGet("")]
         public IActionResult CartItems()
         {
             try
