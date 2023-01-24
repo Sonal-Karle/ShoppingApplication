@@ -1,46 +1,27 @@
-﻿//Ajax call after getting input from UI 
-function CustomerLogin() {
-    var validResult = validateLoginCredentials();
-    if (validResult == false) {
-        return false;
-    }
+﻿
 
-
-    var customer = {
-        EmailId: $("#email").val(),
-        Password: $("#password").val(),
-        Role: $("#role").val()
-    };
-
+function Forgotpassowrd() {
+    var forgetpassword = [];
+    var email = $("#email").val();
+    forgetpassword.push(email);
     $.ajax
         ({
-            type: 'POST',
-            dataType: 'JSON',
-            data: JSON.stringify(customer),
-            url: "/CustomerLogin/LoginCustomer",
-            success: function (result) {
-                if (result.success == true) {
-                    alert("logged in successfully");
+            type: "POST",
+            contentType: "application/json",
+            dataType: "JSON",
+            data: JSON.stringify({ email: email }),
+            url: "/Login/ForgetPassword",
+            success: function (response) {
+                if (response.success) {
+                    ShowSuccess();
+                } else {
+                    console.log(response);
+                    alert(response.message);
                 }
             },
             error: function (errormessage) {
-                alert("Please Enter Valid Credentials");
+                alert(errormessgae);
             }
         });
 }
 
-
-function validateLoginCredentials() {
-    var isValid = true;
-    if ($("#email").val().trim() == "") {
-        $("#email").css('border-color', 'Red');
-        isValid = false;
-    }
-
-
-    if ($("#password").val().trim() == "") {
-        $("#password").css('border-color', 'Red');
-        isValid = false
-    }
-    return isValid;
-}

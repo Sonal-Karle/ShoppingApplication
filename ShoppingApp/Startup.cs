@@ -61,7 +61,7 @@ namespace ShoppingApp
             services.AddTransient<ILoginRepository, LoginRepository>();
             services.AddTransient<IOrderRepository, OrderRepository>();
 
-            services.AddHttpContextAccessor();
+			services.AddHttpContextAccessor();
             services.AddSession(options =>
             {
                 options.IdleTimeout = TimeSpan.FromMinutes(30);//We set Time here 
