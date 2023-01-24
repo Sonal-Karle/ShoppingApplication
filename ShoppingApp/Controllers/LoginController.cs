@@ -156,11 +156,10 @@ namespace ShoppingApp.Controllers
         {
             try
             {
-                if (ModelState.IsValid)
-                {
-                    forgetPasswordModel.email = "Sonal@gmail.com";
+               
+                    forgetPasswordModel.email = "sonalkarle01@gmail.com";
 
-					ForgetPassword result = LoginRepository.ForgetPassword(forgetPasswordModel);                   //getting the data from BusinessLayer
+					ForgetPassword result = LoginRepository.ForgetPassword(forgetPasswordModel);                   
                     var msmq = new MSMQ(Configuration);
                     msmq.MSMQSender(result);
                     if (result != null)
@@ -172,11 +171,7 @@ namespace ShoppingApp.Controllers
                     {
                         return this.Ok(new { Success = true, Message = "Other User is trying to login from your account" });   //(smd format)    //this.Ok returns the data in json format
                     }
-                }
-                else
-                {
-                    return null;
-                }
+              
             }
             catch (Exception ex)
             {
