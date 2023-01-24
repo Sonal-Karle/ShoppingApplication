@@ -34,7 +34,7 @@ namespace Services.Login
                 message.IsBodyHtml = true;
                 message.Body = HtmlBody;
                 smtp.Port = 587;
-                smtp.Host = "smtp.rediffmailpro.com";
+                smtp.Host = "smtp.rediffmail.com";
                 smtp.EnableSsl = true;
                 smtp.UseDefaultCredentials = false;
                 smtp.Credentials = new NetworkCredential(config["IssuerEmailDetail:Email"], config["IssuerEmailDetail:Password"]);

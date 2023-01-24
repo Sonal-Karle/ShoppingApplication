@@ -23,7 +23,7 @@
                    <!-- Logo -->
                     <div class="col-lg-2 col-sm-3 col-3 order-1">
                         <div class="logo_container">
-                        <div class="logo"><a href="@Url.Action("GetAllProduct", "Dashboard")">Marlabs</a></div>
+                            <div class="logo"><a href="@Url.Action("GetAllProduct","Dashboard")">Marlabs</a></div>
                         </div>
                     </div>
 
@@ -65,7 +65,7 @@
                     @if (ViewBag.Role == "Admin")
                     {
                         <div class="col-lg-1 col-8 order-lg-2 order-2 text-lg-left text-right">
-                            <a href="@Url.Action("CreateProduct","Dashboard")" class="btn btn-primary" style="margin-top:25px">NewProduct</a>
+                            <a href="@Url.Action("NewProduct","Dashboard")" class="btn btn-primary" style="margin-top:25px">NewProduct</a>
                         </div>
                     }                
 

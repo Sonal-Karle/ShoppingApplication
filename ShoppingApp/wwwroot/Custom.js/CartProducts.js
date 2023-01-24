@@ -220,12 +220,12 @@ function ShowCompleteAddress() {
 
 //Usage : function to reload the CartItems page and redirect CheckoutSuccess message view
 function ShowSuccess() {
-    window.location.href = '/Cart/CartItems';
+    window.location.href = '/Cart';
     window.location.href = '/Cart/CheckoutSuccess';
 }
 //Usage : Function to reload the CartItems page
 function ReloadCart() {
-    window.location.href = '/Cart/CartItems';
+    window.location.href = '/Cart';
 }
 //Usage : Function to pass productId to delete modal
 function passDataToDeleteModal() {
