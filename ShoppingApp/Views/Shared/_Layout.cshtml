@@ -63,33 +63,30 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Dashboard" asp-action="GetAllProduct">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                        
                     </ul>
                 </div>
+               
                 @if (string.IsNullOrEmpty(@Accessor.HttpContext.Session.GetString("token")))
                 {
-                     <div class="dropdown show">
-                      <a  href="#"  id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="~/UserIcon.png"/>
-                      </a>
+                <div class="dropdown show" style="margin:auto">
+                    <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="~/UserIcon.png" />
+                        </a>
 
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href='@Url.Action("Registration", "User")'>Register</a>
                             <a class="dropdown-item" href='@Url.Action("LoginCustomer", "Login")'>Log In</a>
-                      </div>
+                        </div>
                     </div>
 
-                    
-                  
+
+
                 }
                 @if (!string.IsNullOrEmpty(@Accessor.HttpContext.Session.GetString("token")))
                 {
 
-                    <div class="dropdown show">
+                    <div class="dropdown show" style="margin:auto">
                         <a href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="~/UserIcon.png" />
                         </a>
@@ -100,9 +97,9 @@
                             <a class="dropdown-item" href='@Url.Action("LogoutCustomer", "Login")'>Log Out</a>
                         </div>
                     </div>
-                   @* <div class="top_bar_user">
-                        <div><a href='@Url.Action("LogoutCustomer", "Login")'>Log Out</a></div>
-                    </div>*@
+                    @* <div class="top_bar_user">
+                <div><a href='@Url.Action("LogoutCustomer", "Login")'>Log Out</a></div>
+                </div>*@
                 }
             </div>
         </nav>
@@ -114,7 +111,7 @@
     </div>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - ShoppingApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - ShoppingApp 
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
