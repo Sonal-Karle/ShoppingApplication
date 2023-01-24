@@ -24,6 +24,13 @@
                         </div>
                     </div>
 
+                <div class="col-lg-6 col-12 order-lg-2 order-3 text-lg-left text-right">
+                    <div class="header_search">
+                        <div class="header_search_content">
+                            <div class="header_search_form_container">
+                                <form asp-controller="DashBoard" asp-action="SearchProduct" method="get" class="header_search_form clearfix">
+                                    <input type="text" required="required" class="header_search_input" placeholder="Search for products..." name="searchString">
+                                    <div class="custom_dropdown" style="display: none;">
                     <div class="col-lg-4 col-12 order-lg-2 order-3 text-lg-left text-right">
                         <div class="header_search">
                             <div class="header_search_content">
@@ -66,28 +73,10 @@
                         </div>
                     }
 
-                    <!--Wishlist -->
-                    <div class="col-lg-3 col-8 order-lg-3 order-2 text-lg-left text-right">
-                        <div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
-                            <meta name="viewport" content="width=device-width, initial-scale=1">
-                            <!-- Cart -->
-                            <div class="cart">
-                                <div class="cart_container d-flex flex-row align-items-center justify-content-end">
-                                    <div class="cart_icon">
-
-                                        <a href="@Url.Action("CartItems", "Cart")"><img src="~/Images/CartIcon.png" /></a>
-                                    </div>
-                                    <div class="cart_content">
-                                        <div class="cart_text"><a href="@Url.Action("CartItems", "Cart")">Cart</a></div>
-                                        <div class="cart_price"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+                <!--Wishlist -->
+               
+           </div>
+       
 
             <div class="row">
                 @foreach (var item in Model)
