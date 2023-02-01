@@ -79,7 +79,7 @@ public class DashboardController : Controller
     /// </summary>
     /// <returns></returns>
     [Authorize(Roles = "Admin")]
-    [HttpGet("CreateProductofcomponent")]
+    [HttpGet("NewProduct")]
     public IActionResult CreateProduct()
     {
         try

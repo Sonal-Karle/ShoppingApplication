@@ -218,14 +218,44 @@ function ShowCompleteAddress() {
     }
 }
 
+function UpdateCartNumber() {
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        dataType: "JSON",
+        data: {},
+        url: "/Cart/GetCartCount",
+        success: function (response) {
+            if (response.success) {
+                if (parseInt(response.message) > 0) {
+                    document.getElementById("cartCountHead").innerHTML = response.message;
+                }
+                else {
+                    document.getElementById("cartCountHead").innerHTML = "";
+                }
+            } else {
+                alert(response.message);
+            }
+        },
+        error: function (errormessgae) {
+            alert(errormessgae);
+        }
+    });
+}
+
+window.onload = function () {
+    UpdateCartNumber();
+}
+
+
 //Usage : function to reload the CartItems page and redirect CheckoutSuccess message view
 function ShowSuccess() {
-    window.location.href = '/Cart/CartItems';
+    window.location.href = '/Cart';
     window.location.href = '/Cart/CheckoutSuccess';
 }
 //Usage : Function to reload the CartItems page
 function ReloadCart() {
-    window.location.href = '/Cart/CartItems';
+    window.location.href = '/Cart';
 }
 //Usage : Function to pass productId to delete modal
 function passDataToDeleteModal() {

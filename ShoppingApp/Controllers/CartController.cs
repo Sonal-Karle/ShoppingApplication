@@ -64,6 +64,26 @@ namespace ShoppingApp.Controllers
                 return BadRequest(new { success = false, exception.Message });
             }
         }
+
+        /// <summary>
+        /// Get the number of items in cart
+        /// </summary>
+        /// <returns> Int count of items </returns>        
+        [HttpGet("GetCartCount")]
+        public IActionResult GetCartCount()
+        {
+            try
+            {
+                GetCurrentId();
+                int countProduct=0;
+                countProduct = _cartProductRepository.GetCartProducts(_currentUserId).Count();
+                return Json(new { success = true, message = countProduct });
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(new { success = false, exception.Message });
+            }
+        }
         /// <summary>
         /// Updating the item count in user cart
         /// </summary>
