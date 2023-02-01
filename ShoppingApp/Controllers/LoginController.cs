@@ -146,44 +146,7 @@ namespace ShoppingApp.Controllers
         }
 
 
-        /// <summary>
-        /// Forget password of Registered ID
-        /// </summary>
-        /// <param name="forgetPasswordModel"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public IActionResult ForgetPassword(ForgetPasswordModel forgetPasswordModel)
-        {
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    forgetPasswordModel.email = "Sonal@gmail.com";
-
-					ForgetPassword result = LoginRepository.ForgetPassword(forgetPasswordModel);                   //getting the data from BusinessLayer
-                    var msmq = new MSMQ(Configuration);
-                    msmq.MSMQSender(result);
-                    if (result != null)
-                    {
-                        return this.Ok(new { Success = true, Message = "Your password has been forget sucessfully now you can reset your password" });   //(smd format)    //this.Ok returns the data in json format
-                    }
-
-                    else
-                    {
-                        return this.Ok(new { Success = true, Message = "Other User is trying to login from your account" });   //(smd format)    //this.Ok returns the data in json format
-                    }
-                }
-                else
-                {
-                    return null;
-                }
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(new { Success = false, ex.Message });
-            }
-        }
-
+       
 
     }
 }
